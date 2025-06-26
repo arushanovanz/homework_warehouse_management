@@ -5,12 +5,14 @@ from .unit_of_work import UnitOfWork
 
 
 class WarehouseService:
-    def __init__(self, product_repo: ProductRepository, order_repo: OrderRepository,  uow: UnitOfWork):
+    def __init__(self, product_repo: ProductRepository, order_repo: OrderRepository,
+                 uow: UnitOfWork):
         self.product_repo = product_repo
         self.order_repo = order_repo
         self.uow = uow
 
-    def create_product(self, name: str, quantity: int, price: float, is_active: bool = True) -> Product:
+    def create_product(self, name: str, quantity: int, price: float, is_active: bool = True) \
+            -> Product:
         product = Product(id=None, name=name, quantity=quantity, price=price, is_active=is_active)
         self.product_repo.add(product)
         self.uow.commit()

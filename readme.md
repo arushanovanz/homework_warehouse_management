@@ -8,7 +8,7 @@ pip install -r dev_requirements.txt
 
 
 #### Linter
-
+ pylint domain 
 
 #### Примерное описание бизнес - логики (domain)
 - создание заказа
@@ -20,9 +20,9 @@ pip install -r dev_requirements.txt
 
 
 #### БД
-
+sqlite warehouse.db
 
 #### Запуск тестов
-
+pytest -s -v
 
 #### 

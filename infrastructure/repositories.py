@@ -99,14 +99,16 @@ class SqlAlchemyOrderRepository(OrderRepository):
                 Product(id=p.id, name=p.name, quantity=p.quantity, price=p.price)
                 for p in order_orm.products
             ]
-            orders.append(Order(id=order_orm.id, products=products, create_datetime=order_orm.create_datetime,
+            orders.append(Order(id=order_orm.id, products=products,
+                                create_datetime=order_orm.create_datetime,
                                 update_datetime=order_orm.update_datetime,
                                 address=order_orm.address))
         return orders
 
     def delete_product(self, order: Order, product: Product) -> Order:
         if product not in order.products:
-            raise ValueError(f"Product {product.id} with {product.name} not found in order # {order.id}")
+            raise ValueError(f"Product {product.id} with "
+                             f"{product.name} not found in order # {order.id}")
         for p in order.products:
             if p.id == product.id:
                 self.session.delete(product)
@@ -116,7 +118,8 @@ class SqlAlchemyOrderRepository(OrderRepository):
 
     def delete_one_quantity_product(self, order: Order, product: Product) -> Order:
         if product not in order.products:
-            raise ValueError(f"Product {product.id} with {product.name} not found in order # {order.id}")
+            raise ValueError(f"Product {product.id} with "
+                             f"{product.name} not found in order # {order.id}")
         for p in order.products:
             if p.id == p.id:
                 if p.quantity < 1:

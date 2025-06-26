@@ -20,4 +20,3 @@ class Order:
 
     def add_product(self, product: Product):
         self.products.append(product)
-
